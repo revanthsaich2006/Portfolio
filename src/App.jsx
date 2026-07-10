@@ -30,6 +30,7 @@ const LinkedinIcon = ({ size = 20, ...props }) => (
 function App() {
   const [searchVal, setSearchVal] = useState('');
   const [location, setLocation] = useState('Remote');
+  const [lang, setLang] = useState('en');
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [isOffersOpen, setIsOffersOpen] = useState(false);
   const [isListShowOpen, setIsListShowOpen] = useState(false);
@@ -62,11 +63,13 @@ function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Map location option to language key
-  let lang = 'en';
-  if (location === 'Korea') lang = 'ko';
-  else if (location === 'India') lang = 'hi';
-  else if (location === 'Andhra Pradesh') lang = 'te';
+  const handleLocationChange = (loc) => {
+    setLocation(loc);
+    if (loc === 'Korea') setLang('ko');
+    else if (loc === 'India') setLang('hi');
+    else if (loc === 'Andhra Pradesh') setLang('te');
+    else setLang('en');
+  };
 
   const t = translations[lang] || translations.en;
 
@@ -84,10 +87,12 @@ function App() {
         searchVal={searchVal} 
         setSearchVal={setSearchVal} 
         location={location} 
-        setLocation={setLocation} 
+        setLocation={handleLocationChange} 
         onOpenBooking={handleOpenBooking} 
         onOpenOffers={handleOpenOffers}
         onOpenResume={handleOpenResume}
+        lang={lang}
+        setLang={setLang}
         t={t}
       />
 

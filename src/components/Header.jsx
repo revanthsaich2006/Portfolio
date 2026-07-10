@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './Header.module.css';
-import { Search, MapPin, ChevronDown, Menu, Briefcase } from 'lucide-react';
+import { Search, MapPin, ChevronDown, Menu, Briefcase, Globe } from 'lucide-react';
 
 export default function Header({ 
   searchVal, 
@@ -10,6 +10,8 @@ export default function Header({
   onOpenBooking,
   onOpenOffers,
   onOpenResume,
+  lang,
+  setLang,
   t
 }) {
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -75,6 +77,7 @@ export default function Header({
           </div>
           
           <div className={styles.right}>
+            {/* Location Selector */}
             <div className={styles.locationSelector}>
               <MapPin size={16} className={styles.pinIcon} />
               <span className={styles.locationText}>{location}</span>
@@ -90,6 +93,42 @@ export default function Header({
                     {loc}
                   </div>
                 ))}
+              </div>
+            </div>
+
+            {/* Manual Language Selector */}
+            <div className={styles.langSelector}>
+              <Globe size={16} className={styles.langIcon} />
+              <span className={styles.langText}>
+                {lang === 'en' ? 'English' : lang === 'ko' ? '한국어' : lang === 'hi' ? 'हिन्दी' : 'తెలుగు'}
+              </span>
+              <ChevronDown size={14} className={styles.chevronIcon} />
+              
+              <div className={styles.langDropdown}>
+                <div 
+                  onClick={() => setLang('en')} 
+                  className={`${styles.langOption} ${lang === 'en' ? styles.activeLang : ''}`}
+                >
+                  English
+                </div>
+                <div 
+                  onClick={() => setLang('ko')} 
+                  className={`${styles.langOption} ${lang === 'ko' ? styles.activeLang : ''}`}
+                >
+                  한국어
+                </div>
+                <div 
+                  onClick={() => setLang('hi')} 
+                  className={`${styles.langOption} ${lang === 'hi' ? styles.activeLang : ''}`}
+                >
+                  हिन्दी
+                </div>
+                <div 
+                  onClick={() => setLang('te')} 
+                  className={`${styles.langOption} ${lang === 'te' ? styles.activeLang : ''}`}
+                >
+                  తెలుగు
+                </div>
               </div>
             </div>
             

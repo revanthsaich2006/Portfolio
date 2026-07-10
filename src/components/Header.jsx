@@ -19,6 +19,16 @@ export default function Header({
     setShowSuggestions(false);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.target.blur(); // Blur search box
+      const projectsSection = document.getElementById('projects');
+      if (projectsSection) {
+        projectsSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   return (
     <header className={styles.header}>
       {/* Top Main Nav */}
@@ -39,6 +49,7 @@ export default function Header({
                 onChange={(e) => setSearchVal(e.target.value)}
                 onFocus={() => setShowSuggestions(true)}
                 onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
+                onKeyDown={handleKeyDown}
               />
               
               {/* Autocomplete Dropdown */}
@@ -51,7 +62,7 @@ export default function Header({
                         key={s}
                         type="button"
                         className={styles.suggestionTag}
-                        onClick={() => handleSuggestionClick(s)}
+                        onMouseDown={() => handleSuggestionClick(s)}
                       >
                         {s}
                       </button>

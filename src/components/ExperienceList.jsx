@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './ExperienceList.module.css';
 import { Calendar, MapPin, Users, Ticket, ArrowUpRight } from 'lucide-react';
 
-export default function ExperienceList({ searchVal, onOpenBooking }) {
+export default function ExperienceList({ searchVal, onOpenBooking, t }) {
   const experiences = [
     {
       id: "edubot",
@@ -53,8 +53,8 @@ export default function ExperienceList({ searchVal, onOpenBooking }) {
     <section id="experience" className={`${styles.experienceSection} container`}>
       <div className={styles.sectionHeader}>
         <div>
-          <h2 className={styles.sectionTitle}>Featured Theater & Live Shows (Experience)</h2>
-          <p className={styles.sectionSubtitle}>Chronological productions of internships, international exchange, and academic records</p>
+          <h2 className={styles.sectionTitle}>{t.featuredShows}</h2>
+          <p className={styles.sectionSubtitle}>{t.experienceSubtitle}</p>
         </div>
       </div>
 
@@ -111,14 +111,14 @@ export default function ExperienceList({ searchVal, onOpenBooking }) {
                       className={styles.infoBtn}
                       onClick={() => toggleExpand(exp.id)}
                     >
-                      {isExpanded ? 'Hide Details' : 'View Synopsis'}
+                      {isExpanded ? t.hideDetails : t.viewSynopsis}
                     </button>
                     <button 
                       className={styles.bookBtn}
                       onClick={onOpenBooking}
                     >
                       <Ticket size={14} />
-                      <span>Book Slot</span>
+                      <span>{t.bookSlotBtn}</span>
                     </button>
                   </div>
                 </div>
@@ -131,7 +131,7 @@ export default function ExperienceList({ searchVal, onOpenBooking }) {
                     <div className={styles.synopsisFooter}>
                       <span>Genre: Academic Scholar / Software Engineer Intern</span>
                       <button className={styles.contactBtn} onClick={onOpenBooking}>
-                        Request Reference Details <ArrowUpRight size={14} />
+                        {t.requestReferences} <ArrowUpRight size={14} />
                       </button>
                     </div>
                   </div>

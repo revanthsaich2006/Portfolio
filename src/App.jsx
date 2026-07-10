@@ -9,6 +9,7 @@ import BookingModal from './components/BookingModal';
 import OffersModal from './components/OffersModal';
 import ListShowModal from './components/ListShowModal';
 import ResumeModal from './components/ResumeModal';
+import { translations } from './utils/translations';
 import { Gift, HelpCircle, Shield, PhoneCall, Mail, ArrowUp } from 'lucide-react';
 
 // Custom inline SVG icons for brands (as they are not present in modern brand-neutral lucide-react)
@@ -61,6 +62,14 @@ function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  // Map location option to language key
+  let lang = 'en';
+  if (location === 'Korea') lang = 'ko';
+  else if (location === 'India') lang = 'hi';
+  else if (location === 'Andhra Pradesh') lang = 'te';
+
+  const t = translations[lang] || translations.en;
+
   return (
     <>
       {/* Aurora Ambient Background */}
@@ -79,23 +88,24 @@ function App() {
         onOpenBooking={handleOpenBooking} 
         onOpenOffers={handleOpenOffers}
         onOpenResume={handleOpenResume}
+        t={t}
       />
 
       {/* Featured Banner Billboard Carousel */}
-      <BannerCarousel onOpenBooking={handleOpenBooking} />
+      <BannerCarousel onOpenBooking={handleOpenBooking} t={t} />
 
       <main style={{ flexGrow: 1 }}>
         {/* Recommended Movies -> Recommended Projects */}
-        <ProjectGrid searchVal={searchVal} onOpenBooking={handleOpenBooking} />
+        <ProjectGrid searchVal={searchVal} onOpenBooking={handleOpenBooking} t={t} />
 
         {/* Live Events -> Skills & Tech Workshops */}
-        <SkillsSection searchVal={searchVal} />
+        <SkillsSection searchVal={searchVal} t={t} />
 
         {/* Theatrical Plays -> Work Experiences */}
-        <ExperienceList searchVal={searchVal} onOpenBooking={handleOpenBooking} />
+        <ExperienceList searchVal={searchVal} onOpenBooking={handleOpenBooking} t={t} />
 
         {/* Cast & Crew -> About Developer & Testimonial Reviews */}
-        <CastSection />
+        <CastSection t={t} />
       </main>
 
       {/* BookMyShow Style Footer */}
@@ -105,10 +115,10 @@ function App() {
           <div style={styles.bannerContainer}>
             <div style={styles.bannerLeft}>
               <Gift style={styles.giftIcon} size={22} />
-              <strong style={styles.bannerText}>List your Show!</strong>
-              <span style={styles.bannerSubtext}>Got an idea, product, or position? Let's showcase it together.</span>
+              <strong style={styles.bannerText}>{t.listYourShow}</strong>
+              <span style={styles.bannerSubtext}>{t.listShowSubtext}</span>
             </div>
-            <button style={styles.bannerBtn} onClick={handleOpenListShow}>Contact Now</button>
+            <button style={styles.bannerBtn} onClick={handleOpenListShow}>{t.contactNow}</button>
           </div>
         </div>
 
@@ -117,15 +127,15 @@ function App() {
           <div style={styles.supportGrid}>
             <div style={styles.supportItem}>
               <PhoneCall size={20} style={styles.supportIcon} />
-              <span>24/7 CUSTOMER CARE</span>
+              <span>{t.customerCare}</span>
             </div>
             <div style={styles.supportItem} onClick={handleOpenBooking}>
               <HelpCircle size={20} style={styles.supportIcon} />
-              <span>BOOKING CONFIRMATION</span>
+              <span>{t.bookingConfirmation}</span>
             </div>
             <a href="https://github.com/revanthsaich2006" target="_blank" rel="noopener noreferrer" style={styles.supportItemLink}>
               <Shield size={20} style={styles.supportIcon} />
-              <span>SECURE REPOSITORIES</span>
+              <span>{t.secureRepos}</span>
             </a>
           </div>
         </div>
@@ -149,8 +159,7 @@ function App() {
           </div>
 
           <p style={styles.copyright}>
-            Copyright 2026 &copy; bookmydev Ltd. All Rights Reserved.<br />
-            This portfolio is built as a tribute layout and is designed to host cleanly on Vercel.
+            {t.copyright}
           </p>
         </div>
       </footer>

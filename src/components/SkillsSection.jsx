@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './SkillsSection.module.css';
 import { Sparkles, Terminal, Cpu, Database, Cloud, ChevronDown, ChevronUp } from 'lucide-react';
 
-export default function SkillsSection({ searchVal }) {
+export default function SkillsSection({ searchVal, t }) {
   const categories = [
     { id: 'all', name: 'All Events' },
     { id: 'languages', name: 'Languages' },
@@ -28,64 +28,64 @@ export default function SkillsSection({ searchVal }) {
       venue: "Terminal / Query Editor",
       price: "FREE",
       rating: "4.9★",
-      popularity: "Lead Performance",
+      popularity: "Highly Rated",
       topics: [
-        "Object-Oriented Programming (OOP) concepts",
-        "Python automation scripting & data frames",
-        "SQL complex subqueries & relational models",
-        "C/C++ memory pointers & standard libraries",
-        "JavaScript ESNext features & DOM controls"
+        "Python automation scripting & basic structures",
+        "SQL Relational database designs & joins",
+        "Procedural C language pointer manipulation",
+        "Object Oriented C++ system designs",
+        "Dynamic JS web behaviors & interfaces"
       ]
     },
     {
-      id: "databases",
-      title: "Relational & Document DBs",
+      id: "databases-frameworks",
+      title: "Relational DBs & Frameworks",
       category: "db-frameworks",
       icon: <Database size={24} />,
-      type: "Data Architecture Class",
+      type: "Masterclass Act",
       lang: "MySQL, SQLite, MongoDB",
-      venue: "Relational Schemas / Collections",
+      venue: "SQL Console / Server Admin",
       price: "FREE",
       rating: "4.8★",
       popularity: "Best Seller",
       topics: [
-        "Database normalization (1NF, 2NF, 3NF)",
-        "Indexing & query execution plan analysis",
-        "Transactions (ACID properties) & locking",
-        "MongoDB BSON collections & CRUD operations",
-        "SQLite lightweight embedded architectures"
+        "Relational algebra & SQL query tuning",
+        "SQLite localized lightweight storage systems",
+        "Database normalization & ACID rules",
+        "MongoDB document model integrations",
+        "Index allocations & query execution plans"
       ]
     },
     {
-      id: "frameworks",
-      title: "Backend Web Frameworks",
+      id: "web-frameworks",
+      title: "Backend Servers & Frameworks",
       category: "db-frameworks",
       icon: <Cpu size={24} />,
-      type: "Streaming Masterclass",
+      type: "Application Class",
       lang: "Flask, Node.js",
-      venue: "Local Host / REST Servers",
+      venue: "WSGI Server / Node Runtime Environment",
       price: "FREE",
       rating: "4.8★",
       popularity: "Trending",
       topics: [
-        "Flask MVC routing & blueprint scaling",
-        "Node.js asynchronous event loops & callbacks",
-        "HTTP request/response body parsing",
-        "Session & cookie authentication flow",
-        "CORS configurations & JSON headers"
+        "Python Flask server creation & routing setups",
+        "Node.js asynchronous eventloop pipelines",
+        "REST API request/response format protocols",
+        "JSON payload parsing & status responses",
+        "Middleware security checks & CORS filters"
       ]
     },
     {
       id: "core-cs",
-      title: "Computer Science Core Shows",
+      title: "Core CS Systems & Algorithms",
       category: "concepts-tools",
       icon: <Cpu size={24} />,
       type: "Academic Foundation",
       lang: "DBMS, OOP, DSA, OS, Computer Networks",
-      venue: "SRM AP / Sungkyunkwan Specs",
+      venue: "Systems / Machine Architectures",
       price: "FREE",
       rating: "4.9★",
-      popularity: "Highly Rated",
+      popularity: "Academic Core",
       topics: [
         "Operating System CPU scheduling & memory paging",
         "Data Structures: Trees, Graphs, Hash Maps, Lists",
@@ -134,7 +134,6 @@ export default function SkillsSection({ searchVal }) {
     }
   ];
 
-  // Filtering skills by searchVal and tab
   const filteredSkills = skills.filter(skill => {
     const matchesSearch = 
       skill.title.toLowerCase().includes(searchVal.toLowerCase()) ||
@@ -149,16 +148,14 @@ export default function SkillsSection({ searchVal }) {
   return (
     <section id="skills" className={styles.skillsSection}>
       <div className={`${styles.container} container`}>
-        {/* Banner header like BMS live events section */}
         <div className={styles.sectionHeader}>
           <div className={styles.headerTitle}>
             <Sparkles size={20} className={styles.headerIcon} />
-            <h2>The Best of Live Events (Skills & Coursework)</h2>
+            <h2>{t.bestLiveEvents}</h2>
           </div>
-          <p className={styles.subtext}>Explore verified core capabilities, frameworks, and programming workshops.</p>
+          <p className={styles.subtext}>{t.skillsSubtitle}</p>
         </div>
 
-        {/* Tab Filters */}
         <div className={styles.tabsContainer}>
           {categories.map(tab => (
             <button
@@ -171,7 +168,6 @@ export default function SkillsSection({ searchVal }) {
           ))}
         </div>
 
-        {/* Event Cards Row */}
         {filteredSkills.length > 0 ? (
           <div className={styles.eventsGrid}>
             {filteredSkills.map(skill => {
@@ -181,7 +177,6 @@ export default function SkillsSection({ searchVal }) {
                   key={skill.id} 
                   className={`${styles.eventCard} ${isExpanded ? styles.expandedCard : ''}`}
                 >
-                  {/* Event Thumbnail */}
                   <div className={styles.eventThumbnail}>
                     <div className={styles.iconWrapper}>
                       {skill.icon}
@@ -190,7 +185,6 @@ export default function SkillsSection({ searchVal }) {
                     <span className={styles.ratingBadge}>{skill.rating}</span>
                   </div>
 
-                  {/* Event Details */}
                   <div className={styles.eventDetails}>
                     <p className={styles.eventType}>{skill.type}</p>
                     <h3 className={styles.eventTitle}>{skill.title}</h3>
@@ -204,15 +198,14 @@ export default function SkillsSection({ searchVal }) {
                         onClick={() => toggleSpecs(skill.id)}
                         aria-expanded={isExpanded}
                       >
-                        {isExpanded ? 'CLOSE SPECS' : 'VIEW SPECS'}
+                        {isExpanded ? t.closeSpecs : t.viewSpecs}
                       </button>
                     </div>
                   </div>
 
-                  {/* Expandable Specifications Drawer */}
                   {isExpanded && (
                     <div className={`${styles.specsDrawer} fade-in`}>
-                      <h4>Covered Topics & Concepts:</h4>
+                      <h4>{t.coveredTopics}</h4>
                       <ul className={styles.topicsList}>
                         {skill.topics.map((topic, i) => (
                           <li key={i} className={styles.topicItem}>{topic}</li>

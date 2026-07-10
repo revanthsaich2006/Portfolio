@@ -2,18 +2,18 @@ import React, { useState, useEffect } from 'react';
 import styles from './BannerCarousel.module.css';
 import { ChevronLeft, ChevronRight, Play, Calendar } from 'lucide-react';
 
-export default function BannerCarousel({ onOpenBooking }) {
+export default function BannerCarousel({ onOpenBooking, t }) {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slides = [
     {
       id: 1,
-      title: "CHERUKURI REVANTH SAI",
-      subtitle: "Starring in: OPEN FOR HIRE",
-      tags: "B.Tech CSE • Flask & Node.js • CGPA 8.06 • Active Intern",
-      desc: "A software engineering undergraduate at SRM University AP (exchange scholar at Sungkyunkwan University, South Korea) specializing in backend architectures, SQL database scaling, and API integrations.",
+      title: t.banner1Title,
+      subtitle: t.banner1Subtitle,
+      tags: t.banner1Tags,
+      desc: t.banner1Desc,
       image: "/banner_hiring.jpg",
-      actionText: "Book Interview",
+      actionText: t.banner1Btn,
       isLive: true,
       action: onOpenBooking
     },

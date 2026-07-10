@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './ProjectGrid.module.css';
 import { ThumbsUp, ArrowUpRight, Film } from 'lucide-react';
 
-export default function ProjectGrid({ searchVal, onOpenBooking }) {
+export default function ProjectGrid({ searchVal, onOpenBooking, t }) {
   const projects = [
     {
       id: "studysphere",
@@ -57,8 +57,8 @@ export default function ProjectGrid({ searchVal, onOpenBooking }) {
     <section id="projects" className={`${styles.section} container`}>
       <div className={styles.sectionHeader}>
         <div>
-          <h2 className={styles.sectionTitle}>Recommended Projects</h2>
-          <p className={styles.sectionSubtitle}>Handpicked releases of code, databases, and distributed systems</p>
+          <h2 className={styles.sectionTitle}>{t.recommendedProjects}</h2>
+          <p className={styles.sectionSubtitle}>{t.projectsSubtitle}</p>
         </div>
         <a 
           href="https://github.com/revanthsaich2006" 
@@ -66,7 +66,7 @@ export default function ProjectGrid({ searchVal, onOpenBooking }) {
           rel="noopener noreferrer" 
           className={styles.seeAll}
         >
-          See All Projects &rsaquo;
+          {t.seeAllProjects}
         </a>
       </div>
 
@@ -111,11 +111,11 @@ export default function ProjectGrid({ searchVal, onOpenBooking }) {
                       rel="noopener noreferrer" 
                       className={styles.overlayBtn}
                     >
-                      <span>Code</span>
+                      <span>{t.codeBtn}</span>
                       <ArrowUpRight size={14} />
                     </a>
                     <button className={`${styles.overlayBtn} ${styles.redBtn}`} onClick={onOpenBooking}>
-                      <span>Book Slot</span>
+                      <span>{t.bookSlotBtn}</span>
                     </button>
                   </div>
                 </div>
@@ -132,8 +132,8 @@ export default function ProjectGrid({ searchVal, onOpenBooking }) {
       ) : (
         <div className={styles.emptyState}>
           <Film size={48} className={styles.emptyIcon} />
-          <h3>No Shows Found</h3>
-          <p>We couldn't find any projects matching "{searchVal}". Try searching for keywords like "Python", "SQL", "StudySphere", or "Node".</p>
+          <h3>{t.noShowsFound}</h3>
+          <p>{t.noShowsDesc}</p>
         </div>
       )}
     </section>

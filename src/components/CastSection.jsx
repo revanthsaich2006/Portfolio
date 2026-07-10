@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './CastSection.module.css';
 import { Star } from 'lucide-react';
 
-export default function CastSection() {
+export default function CastSection({ t }) {
   const cast = [
     {
       id: "revanth",
@@ -45,8 +45,8 @@ export default function CastSection() {
     <section id="about" className={`${styles.aboutSection} container`}>
       {/* Cast Section */}
       <div className={styles.wrapper}>
-        <h2 className={styles.sectionTitle}>Cast</h2>
-        <p className={styles.sectionSubtitle}>Multiple engineering roles played by Revanth Sai</p>
+        <h2 className={styles.sectionTitle}>{t.castTitle}</h2>
+        <p className={styles.sectionSubtitle}>{t.castSubtitle}</p>
         
         <div className={styles.castGrid}>
           {cast.map(member => (
@@ -66,8 +66,8 @@ export default function CastSection() {
 
       {/* Crew Section */}
       <div className={styles.wrapper}>
-        <h2 className={styles.sectionTitle}>Crew</h2>
-        <p className={styles.sectionSubtitle}>Behind-the-scenes specs, certifications, and details</p>
+        <h2 className={styles.sectionTitle}>{t.crewTitle}</h2>
+        <p className={styles.sectionSubtitle}>{t.crewSubtitle}</p>
         
         <div className={styles.crewGrid}>
           {crew.map((member, index) => (
@@ -84,7 +84,7 @@ export default function CastSection() {
         <div className={styles.reviewsHeader}>
           <div className={styles.headerLeft}>
             <Star className={styles.starIcon} size={20} />
-            <h2>Audience & Critic Reviews</h2>
+            <h2>{t.audienceReviews}</h2>
           </div>
           <span className={styles.totalRating}>4.9/5 (210 reviews)</span>
         </div>

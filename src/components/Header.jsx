@@ -9,7 +9,8 @@ export default function Header({
   setLocation, 
   onOpenBooking,
   onOpenOffers,
-  onOpenResume
+  onOpenResume,
+  t
 }) {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const trendingSearches = ['Python', 'SQL', 'StudySphere', 'Flask', 'MySQL', 'MongoDB', 'Node.js', 'HPC'];
@@ -43,7 +44,7 @@ export default function Header({
               <Search className={styles.searchIcon} size={18} />
               <input 
                 type="text" 
-                placeholder="Search for Python, SQL, StudySphere, EduBot..." 
+                placeholder={t.searchPlaceholder}
                 className={styles.searchInput}
                 value={searchVal}
                 onChange={(e) => setSearchVal(e.target.value)}
@@ -80,7 +81,7 @@ export default function Header({
               <ChevronDown size={14} className={styles.chevronIcon} />
               
               <div className={styles.locationDropdown}>
-                {['Remote', 'Vijayawada', 'SRM AP Campus', 'Seoul, South Korea'].map((loc) => (
+                {['Remote', 'Korea', 'India', 'Andhra Pradesh'].map((loc) => (
                   <div 
                     key={loc} 
                     className={`${styles.locOption} ${location === loc ? styles.activeLoc : ''}`}
@@ -94,7 +95,7 @@ export default function Header({
             
             <button className={styles.hireBtn} onClick={onOpenBooking}>
               <Briefcase size={16} />
-              <span>Hire Revanth</span>
+              <span>{t.hireMe}</span>
             </button>
             
             <button className={styles.menuBtn} aria-label="Menu">
@@ -108,23 +109,23 @@ export default function Header({
       <div className={styles.bottomNav}>
         <div className={`${styles.container} container`}>
           <nav className={styles.navLinks}>
-            <a href="#projects" className={styles.navLink}>Projects (Movies)</a>
-            <a href="#skills" className={styles.navLink}>Skills & Tech (Events)</a>
-            <a href="#experience" className={styles.navLink}>Experience (Shows)</a>
-            <a href="#about" className={styles.navLink}>Cast & Reviews (Bio)</a>
+            <a href="#projects" className={styles.navLink}>{t.projectsLink}</a>
+            <a href="#skills" className={styles.navLink}>{t.skillsLink}</a>
+            <a href="#experience" className={styles.navLink}>{t.experienceLink}</a>
+            <a href="#about" className={styles.navLink}>{t.castLink}</a>
           </nav>
           
           <div className={styles.navExtras}>
-            <span className={styles.extraLink} onClick={onOpenBooking}>Book Consultation</span>
+            <span className={styles.extraLink} onClick={onOpenBooking}>{t.bookConsultation}</span>
             <span 
               className={styles.badge} 
               onClick={onOpenOffers}
               style={{ cursor: 'pointer' }}
             >
-              OFFERS
+              {t.offersBadge}
             </span>
             <span className={styles.extraLink} onClick={onOpenResume}>
-              Print Resume
+              {t.printResume}
             </span>
             <a 
               href="https://github.com/revanthsaich2006" 

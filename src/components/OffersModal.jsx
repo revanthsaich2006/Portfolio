@@ -52,7 +52,7 @@ export default function OffersModal({ isOpen, onClose }) {
             Unlock special cinema-themed developer combos for your projects. Copy these codes and mention them during seat bookings!
           </p>
 
-          <div style={styles.vouchersList}>
+          <div className={styles.vouchersList}>
             {vouchers.map(v => (
               <div key={v.id} className={styles.voucherCard}>
                 {/* Left Cutout Details */}
